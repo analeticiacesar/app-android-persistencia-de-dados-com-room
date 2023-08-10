@@ -2,14 +2,14 @@ package br.com.alura.orgs.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import br.com.alura.orgs.dao.ProdutosDao
+import br.com.alura.orgs.dao.ProductsDao
 import br.com.alura.orgs.databinding.ActivityFormularioProdutoBinding
 import br.com.alura.orgs.extensions.tentaCarregarImagem
-import br.com.alura.orgs.model.Produto
-import br.com.alura.orgs.ui.dialog.FormularioImagemDialog
+import br.com.alura.orgs.model.Product
+import br.com.alura.orgs.ui.dialog.ImageFormDialog
 import java.math.BigDecimal
 
-class FormularioProdutoActivity : AppCompatActivity() {
+class ProductFormActivity : AppCompatActivity() {
 
     private val binding by lazy {
         ActivityFormularioProdutoBinding.inflate(layoutInflater)
@@ -22,7 +22,7 @@ class FormularioProdutoActivity : AppCompatActivity() {
         title = "Cadastrar produto"
         configuraBotaoSalvar()
         binding.activityFormularioProdutoImagem.setOnClickListener {
-            FormularioImagemDialog(this)
+            ImageFormDialog(this)
                 .mostra(url) { imagem ->
                     url = imagem
                     binding.activityFormularioProdutoImagem.tentaCarregarImagem(url)
@@ -32,7 +32,7 @@ class FormularioProdutoActivity : AppCompatActivity() {
 
     private fun configuraBotaoSalvar() {
         val botaoSalvar = binding.activityFormularioProdutoBotaoSalvar
-        val dao = ProdutosDao()
+        val dao = ProductsDao()
         botaoSalvar.setOnClickListener {
             val produtoNovo = criaProduto()
             dao.adiciona(produtoNovo)
@@ -40,7 +40,7 @@ class FormularioProdutoActivity : AppCompatActivity() {
         }
     }
 
-    private fun criaProduto(): Produto {
+    private fun criaProduto(): Product {
         val campoNome = binding.activityFormularioProdutoNome
         val nome = campoNome.text.toString()
         val campoDescricao = binding.activityFormularioProdutoDescricao
@@ -53,7 +53,7 @@ class FormularioProdutoActivity : AppCompatActivity() {
             BigDecimal(valorEmTexto)
         }
 
-        return Produto(
+        return Product(
             nome = nome,
             descricao = descricao,
             valor = valor,

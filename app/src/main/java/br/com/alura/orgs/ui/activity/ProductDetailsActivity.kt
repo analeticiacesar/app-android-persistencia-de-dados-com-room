@@ -5,9 +5,9 @@ import android.os.Bundle
 import br.com.alura.orgs.databinding.ActivityDetalhesProdutoBinding
 import br.com.alura.orgs.extensions.formataParaMoedaBrasileira
 import br.com.alura.orgs.extensions.tentaCarregarImagem
-import br.com.alura.orgs.model.Produto
+import br.com.alura.orgs.model.Product
 
-class DetalhesProdutoActivity : AppCompatActivity() {
+class ProductDetailsActivity : AppCompatActivity() {
 
     private val binding by lazy {
         ActivityDetalhesProdutoBinding.inflate(layoutInflater)
@@ -20,18 +20,18 @@ class DetalhesProdutoActivity : AppCompatActivity() {
     }
 
     private fun tentaCarregarProduto() {
-        intent.getParcelableExtra<Produto>(CHAVE_PRODUTO)?.let { produtoCarregado ->
+        intent.getParcelableExtra<Product>(CHAVE_PRODUTO)?.let { produtoCarregado ->
             preencheCampos(produtoCarregado)
         } ?: finish()
     }
 
-    private fun preencheCampos(produtoCarregado: Produto) {
+    private fun preencheCampos(productCarregado: Product) {
         with(binding) {
-            activityDetalhesProdutoImagem.tentaCarregarImagem(produtoCarregado.imagem)
-            activityDetalhesProdutoNome.text = produtoCarregado.nome
-            activityDetalhesProdutoDescricao.text = produtoCarregado.descricao
+            activityDetalhesProdutoImagem.tentaCarregarImagem(productCarregado.imagem)
+            activityDetalhesProdutoNome.text = productCarregado.nome
+            activityDetalhesProdutoDescricao.text = productCarregado.descricao
             activityDetalhesProdutoValor.text =
-                produtoCarregado.valor.formataParaMoedaBrasileira()
+                productCarregado.valor.formataParaMoedaBrasileira()
         }
     }
 

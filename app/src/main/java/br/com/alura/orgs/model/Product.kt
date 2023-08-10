@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 import java.math.BigDecimal
 
 @Parcelize
-data class Produto(
+data class Product(
         val nome: String,
         val descricao: String,
         val valor: BigDecimal,

@@ -8,41 +8,41 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.orgs.databinding.ProdutoItemBinding
 import br.com.alura.orgs.extensions.formataParaMoedaBrasileira
 import br.com.alura.orgs.extensions.tentaCarregarImagem
-import br.com.alura.orgs.model.Produto
+import br.com.alura.orgs.model.Product
 
-class ListaProdutosAdapter(
+class ProductListAdapter(
     private val context: Context,
-    produtos: List<Produto>,
-    var quandoClicaNoItem: (produto: Produto) -> Unit = {}
-) : RecyclerView.Adapter<ListaProdutosAdapter.ViewHolder>() {
+    products: List<Product>,
+    var quandoClicaNoItem: (product: Product) -> Unit = {}
+) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
-    private val produtos = produtos.toMutableList()
+    private val produtos = products.toMutableList()
 
     inner class ViewHolder(private val binding: ProdutoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private lateinit var produto: Produto
+        private lateinit var product: Product
 
         init {
             itemView.setOnClickListener {
-                if (::produto.isInitialized) {
-                    quandoClicaNoItem(produto)
+                if (::product.isInitialized) {
+                    quandoClicaNoItem(product)
                 }
             }
         }
 
-        fun vincula(produto: Produto) {
-            this.produto = produto
+        fun vincula(product: Product) {
+            this.product = product
             val nome = binding.produtoItemNome
-            nome.text = produto.nome
+            nome.text = product.nome
             val descricao = binding.produtoItemDescricao
-            descricao.text = produto.descricao
+            descricao.text = product.descricao
             val valor = binding.produtoItemValor
-            val valorEmMoeda: String = produto.valor
+            val valorEmMoeda: String = product.valor
                 .formataParaMoedaBrasileira()
             valor.text = valorEmMoeda
 
-            val visibilidade = if (produto.imagem != null) {
+            val visibilidade = if (product.imagem != null) {
                 View.VISIBLE
             } else {
                 View.GONE
@@ -50,7 +50,7 @@ class ListaProdutosAdapter(
 
             binding.imageView.visibility = visibilidade
 
-            binding.imageView.tentaCarregarImagem(produto.imagem)
+            binding.imageView.tentaCarregarImagem(product.imagem)
         }
 
 
@@ -69,9 +69,9 @@ class ListaProdutosAdapter(
 
     override fun getItemCount(): Int = produtos.size
 
-    fun atualiza(produtos: List<Produto>) {
+    fun atualiza(products: List<Product>) {
         this.produtos.clear()
-        this.produtos.addAll(produtos)
+        this.produtos.addAll(products)
         notifyDataSetChanged()
     }
 

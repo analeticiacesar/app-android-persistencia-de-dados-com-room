@@ -3,14 +3,14 @@ package br.com.alura.orgs.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import br.com.alura.orgs.dao.ProdutosDao
+import br.com.alura.orgs.dao.ProductsDao
 import br.com.alura.orgs.databinding.ActivityListaProdutosActivityBinding
-import br.com.alura.orgs.ui.recyclerview.adapter.ListaProdutosAdapter
+import br.com.alura.orgs.ui.recyclerview.adapter.ProductListAdapter
 
-class ListaProdutosActivity : AppCompatActivity() {
+class ProductListActivity : AppCompatActivity() {
 
-    private val dao = ProdutosDao()
-    private val adapter = ListaProdutosAdapter(context = this, produtos = dao.buscaTodos())
+    private val dao = ProductsDao()
+    private val adapter = ProductListAdapter(context = this, products = dao.buscaTodos())
     private val binding by lazy {
         ActivityListaProdutosActivityBinding.inflate(layoutInflater)
     }
@@ -36,7 +36,7 @@ class ListaProdutosActivity : AppCompatActivity() {
     }
 
      private fun vaiParaFormularioProduto() {
-        val intent = Intent(this, FormularioProdutoActivity::class.java)
+        val intent = Intent(this, ProductFormActivity::class.java)
         startActivity(intent)
     }
 
@@ -46,7 +46,7 @@ class ListaProdutosActivity : AppCompatActivity() {
         adapter.quandoClicaNoItem = {
             val intent = Intent(
                 this,
-                DetalhesProdutoActivity::class.java
+                ProductDetailsActivity::class.java
             ).apply {
                 putExtra(CHAVE_PRODUTO, it)
             }
