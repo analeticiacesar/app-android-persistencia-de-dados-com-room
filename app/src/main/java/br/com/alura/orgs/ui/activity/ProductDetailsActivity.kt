@@ -2,36 +2,36 @@ package br.com.alura.orgs.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import br.com.alura.orgs.databinding.ActivityDetalhesProdutoBinding
-import br.com.alura.orgs.extensions.formataParaMoedaBrasileira
-import br.com.alura.orgs.extensions.tentaCarregarImagem
+import br.com.alura.orgs.databinding.ActivityProductDetailsBinding
+import br.com.alura.orgs.extensions.formatForBrazilianCurrency
+import br.com.alura.orgs.extensions.tryToLoadImage
 import br.com.alura.orgs.model.Product
 
 class ProductDetailsActivity : AppCompatActivity() {
 
     private val binding by lazy {
-        ActivityDetalhesProdutoBinding.inflate(layoutInflater)
+        ActivityProductDetailsBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        tentaCarregarProduto()
+        tryToLoadProduct()
     }
 
-    private fun tentaCarregarProduto() {
-        intent.getParcelableExtra<Product>(CHAVE_PRODUTO)?.let { produtoCarregado ->
-            preencheCampos(produtoCarregado)
+    private fun tryToLoadProduct() {
+        intent.getParcelableExtra<Product>(PRODUCT_KEY)?.let { loadedProduct ->
+            fillInFields(loadedProduct)
         } ?: finish()
     }
 
-    private fun preencheCampos(productCarregado: Product) {
+    private fun fillInFields(productCarregado: Product) {
         with(binding) {
-            activityDetalhesProdutoImagem.tentaCarregarImagem(productCarregado.imagem)
-            activityDetalhesProdutoNome.text = productCarregado.nome
-            activityDetalhesProdutoDescricao.text = productCarregado.descricao
+            activityDetalhesProdutoImagem.tryToLoadImage(productCarregado.image)
+            activityDetalhesProdutoNome.text = productCarregado.name
+            activityDetalhesProdutoDescricao.text = productCarregado.description
             activityDetalhesProdutoValor.text =
-                productCarregado.valor.formataParaMoedaBrasileira()
+                productCarregado.value.formatForBrazilianCurrency()
         }
     }
 

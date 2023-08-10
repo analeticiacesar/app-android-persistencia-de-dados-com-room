@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/plano_de_fundo_arredondado"
+            android:background="@drawable/rounded_background"
             android:elevation="10dp"
             android:fontFamily="@font/montserrat_bold"
             android:padding="8dp"

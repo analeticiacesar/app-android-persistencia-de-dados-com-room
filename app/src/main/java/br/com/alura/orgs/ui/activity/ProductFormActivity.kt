@@ -3,8 +3,8 @@ package br.com.alura.orgs.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.orgs.dao.ProductsDao
-import br.com.alura.orgs.databinding.ActivityFormularioProdutoBinding
-import br.com.alura.orgs.extensions.tentaCarregarImagem
+import br.com.alura.orgs.databinding.ActivityProductFormBinding
+import br.com.alura.orgs.extensions.tryToLoadImage
 import br.com.alura.orgs.model.Product
 import br.com.alura.orgs.ui.dialog.ImageFormDialog
 import java.math.BigDecimal
@@ -12,7 +12,7 @@ import java.math.BigDecimal
 class ProductFormActivity : AppCompatActivity() {
 
     private val binding by lazy {
-        ActivityFormularioProdutoBinding.inflate(layoutInflater)
+        ActivityProductFormBinding.inflate(layoutInflater)
     }
     private var url: String? = null
 
@@ -20,44 +20,44 @@ class ProductFormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         title = "Cadastrar produto"
-        configuraBotaoSalvar()
+        setupSaveButton()
         binding.activityFormularioProdutoImagem.setOnClickListener {
             ImageFormDialog(this)
-                .mostra(url) { imagem ->
-                    url = imagem
-                    binding.activityFormularioProdutoImagem.tentaCarregarImagem(url)
+                .show(url) { image ->
+                    url = image
+                    binding.activityFormularioProdutoImagem.tryToLoadImage(url)
                 }
         }
     }
 
-    private fun configuraBotaoSalvar() {
-        val botaoSalvar = binding.activityFormularioProdutoBotaoSalvar
+    private fun setupSaveButton() {
+        val saveButton = binding.activityFormularioProdutoBotaoSalvar
         val dao = ProductsDao()
-        botaoSalvar.setOnClickListener {
-            val produtoNovo = criaProduto()
-            dao.adiciona(produtoNovo)
+        saveButton.setOnClickListener {
+            val newProduct = createProduct()
+            dao.add(newProduct)
             finish()
         }
     }
 
-    private fun criaProduto(): Product {
-        val campoNome = binding.activityFormularioProdutoNome
-        val nome = campoNome.text.toString()
-        val campoDescricao = binding.activityFormularioProdutoDescricao
-        val descricao = campoDescricao.text.toString()
-        val campoValor = binding.activityFormularioProdutoValor
-        val valorEmTexto = campoValor.text.toString()
-        val valor = if (valorEmTexto.isBlank()) {
+    private fun createProduct(): Product {
+        val fieldName = binding.activityFormularioProdutoNome
+        val name = fieldName.text.toString()
+        val fieldDescription = binding.activityFormularioProdutoDescricao
+        val description = fieldDescription.text.toString()
+        val fieldValue = binding.activityFormularioProdutoValor
+        val textValue = fieldValue.text.toString()
+        val value = if (textValue.isBlank()) {
             BigDecimal.ZERO
         } else {
-            BigDecimal(valorEmTexto)
+            BigDecimal(textValue)
         }
 
         return Product(
-            nome = nome,
-            descricao = descricao,
-            valor = valor,
-            imagem = url
+            name = name,
+            description = description,
+            value = value,
+            image = url
         )
     }
 

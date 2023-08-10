@@ -4,13 +4,13 @@ import android.widget.ImageView
 import br.com.alura.orgs.R
 import coil.load
 
-fun ImageView.tentaCarregarImagem(
+fun ImageView.tryToLoadImage(
     url: String? = null,
-    fallback: Int = R.drawable.imagem_padrao
+    fallback: Int = R.drawable.default_image
 ){
     load(url) {
         fallback(fallback)
-        error(R.drawable.erro)
+        error(R.drawable.error)
         placeholder(R.drawable.placeholder)
     }
 }

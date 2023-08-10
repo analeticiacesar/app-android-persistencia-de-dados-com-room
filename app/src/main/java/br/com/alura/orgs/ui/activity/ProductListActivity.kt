@@ -4,51 +4,50 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.orgs.dao.ProductsDao
-import br.com.alura.orgs.databinding.ActivityListaProdutosActivityBinding
+import br.com.alura.orgs.databinding.ActivityProductListBinding
 import br.com.alura.orgs.ui.recyclerview.adapter.ProductListAdapter
 
 class ProductListActivity : AppCompatActivity() {
 
     private val dao = ProductsDao()
-    private val adapter = ProductListAdapter(context = this, products = dao.buscaTodos())
+    private val adapter = ProductListAdapter(context = this, products = dao.searchAll())
     private val binding by lazy {
-        ActivityListaProdutosActivityBinding.inflate(layoutInflater)
+        ActivityProductListBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        configuraRecyclerView()
-        configuraFab()
-
+        setupRecyclerView()
+        setupFab()
     }
 
     override fun onResume() {
         super.onResume()
-        adapter.atualiza(dao.buscaTodos())
+        adapter.update(dao.searchAll())
     }
 
-    private fun configuraFab() {
+    private fun setupFab() {
         val fab = binding.activityListaProdutosFab
         fab.setOnClickListener {
-            vaiParaFormularioProduto()
+            goToProductForm()
         }
     }
 
-     private fun vaiParaFormularioProduto() {
+     private fun goToProductForm() {
         val intent = Intent(this, ProductFormActivity::class.java)
         startActivity(intent)
     }
 
-    private fun configuraRecyclerView() {
+    private fun setupRecyclerView() {
         val recyclerView = binding.activityListaProdutosRecyclerView
         recyclerView.adapter = adapter
-        adapter.quandoClicaNoItem = {
+        adapter.clickItem = {
             val intent = Intent(
                 this,
                 ProductDetailsActivity::class.java
             ).apply {
-                putExtra(CHAVE_PRODUTO, it)
+                putExtra(PRODUCT_KEY, it)
             }
             startActivity(intent)
         }

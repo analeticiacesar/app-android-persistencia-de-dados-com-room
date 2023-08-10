@@ -1,3 +1,3 @@
 package br.com.alura.orgs.ui.activity
 
-const val CHAVE_PRODUTO = "produto"
+const val PRODUCT_KEY = "product"

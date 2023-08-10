@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/imagem_padrao" />
+            app:srcCompat="@drawable/default_image" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/formulario_produto_textinputlayout_nome"
