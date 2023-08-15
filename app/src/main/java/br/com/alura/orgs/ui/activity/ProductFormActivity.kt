@@ -14,6 +14,9 @@ class ProductFormActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityProductFormBinding.inflate(layoutInflater)
     }
+    private val productDao by lazy {
+        AppDatabase.getInstance(this).productDao()
+    }
     private var url: String? = null
     private var productId = 0L
 
@@ -29,24 +32,30 @@ class ProductFormActivity : AppCompatActivity() {
                     binding.activityFormularioProdutoImagem.tryToLoadImage(url)
                 }
         }
-        intent.getParcelableExtra<Product>(PRODUCT_KEY)?.let { loadedProduct ->
-            productId = loadedProduct.id
-            url = loadedProduct.image
-            title = "Alterar Produto"
-            binding.apply {
-                activityFormularioProdutoImagem.tryToLoadImage(loadedProduct.image)
-                activityFormularioProdutoNome.setText(loadedProduct.name)
-                activityFormularioProdutoDescricao.setText(loadedProduct.description)
-                activityFormularioProdutoValor.setText(loadedProduct.value.toPlainString())
-            }
+        productId = intent.getLongExtra(PRODUCT_ID_KEY, 0L)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        productDao.searchById(productId)?.let {
+            fillInFields(it)
+        }
+    }
+
+
+    private fun fillInFields(product: Product) {
+        url = product.image
+        title = "Alterar Produto"
+        binding.apply {
+            activityFormularioProdutoImagem.tryToLoadImage(product.image)
+            activityFormularioProdutoNome.setText(product.name)
+            activityFormularioProdutoDescricao.setText(product.description)
+            activityFormularioProdutoValor.setText(product.value.toPlainString())
         }
     }
 
     private fun setupSaveButton() {
         val saveButton = binding.activityFormularioProdutoBotaoSalvar
-        val db = AppDatabase.getInstance(this)
-        val productDao = db.productDao()
         saveButton.setOnClickListener {
             val newProduct = createProduct()
             if(productId > 0) {

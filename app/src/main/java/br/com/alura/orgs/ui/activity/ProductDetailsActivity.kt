@@ -14,7 +14,7 @@ import br.com.alura.orgs.model.Product
 
 class ProductDetailsActivity : AppCompatActivity() {
 
-    private var productId: Long? = null
+    private var productId: Long = 0L
     private var product: Product? = null
     private val binding by lazy {
         ActivityProductDetailsBinding.inflate(layoutInflater)
@@ -31,9 +31,11 @@ class ProductDetailsActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        productId?.let { id ->
-            product = productDao.searchById(id)
-        }
+        searchProduct()
+    }
+
+    private fun searchProduct() {
+        product = productDao.searchById(productId)
         product?.let {
             fillInFields(it)
         } ?: finish()
@@ -48,7 +50,7 @@ class ProductDetailsActivity : AppCompatActivity() {
             when(item.itemId) {
                 R.id.item_edit -> {
                     Intent(this, ProductFormActivity::class.java).apply {
-                        putExtra(PRODUCT_KEY, product)
+                        putExtra(PRODUCT_ID_KEY, productId)
                         startActivity(this)
                     }
                 }
@@ -62,9 +64,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     private fun tryToLoadProduct() {
-        intent.getParcelableExtra<Product>(PRODUCT_KEY)?.let { loadedProduct ->
-            productId = loadedProduct.id
-        } ?: finish()
+        productId = intent.getLongExtra(PRODUCT_ID_KEY, 0L)
     }
 
     private fun fillInFields(loadedProduct: Product) {
