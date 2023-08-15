@@ -12,7 +12,7 @@ import br.com.alura.orgs.model.Product
 
 class ProductListAdapter(
     private val context: Context,
-    products: List<Product>,
+    products: List<Product> = emptyList(),
     var clickItem: (product: Product) -> Unit = {}
 ) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
