@@ -58,12 +58,7 @@ class ProductFormActivity : AppCompatActivity() {
         val saveButton = binding.activityFormularioProdutoBotaoSalvar
         saveButton.setOnClickListener {
             val newProduct = createProduct()
-            if(productId > 0) {
-                productDao.update(newProduct)
-            }
-            else {
-                productDao.save(newProduct)
-            }
+            productDao.save(newProduct)
             finish()
         }
     }
