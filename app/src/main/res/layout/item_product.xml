@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/produto_item_nome"
+            android:id="@+id/product_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -23,25 +23,25 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintStart_toEndOf="@id/product_item_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
-            android:id="@+id/produto_item_descricao"
+            android:id="@+id/product_item_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/produto_item_nome"
-            app:layout_constraintStart_toStartOf="@id/produto_item_nome"
-            app:layout_constraintTop_toBottomOf="@id/produto_item_nome"
+            app:layout_constraintEnd_toEndOf="@id/product_item_name"
+            app:layout_constraintStart_toStartOf="@id/product_item_name"
+            app:layout_constraintTop_toBottomOf="@id/product_item_name"
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
-            android:id="@+id/produto_item_valor"
+            android:id="@+id/product_item_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -51,19 +51,19 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/produto_item_nome"
-            app:layout_constraintStart_toStartOf="@id/produto_item_nome"
-            app:layout_constraintTop_toBottomOf="@id/produto_item_descricao"
+            app:layout_constraintEnd_toEndOf="@id/product_item_name"
+            app:layout_constraintStart_toStartOf="@id/product_item_name"
+            app:layout_constraintTop_toBottomOf="@id/product_item_description"
             tools:text="R$ 19.99" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/product_item_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
             app:layout_constraintWidth_percent="0.3"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/produto_item_nome"
+            app:layout_constraintEnd_toStartOf="@id/product_item_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/product_1"

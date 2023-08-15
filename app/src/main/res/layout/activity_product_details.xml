@@ -12,7 +12,7 @@
         tools:context=".ui.activity.ProductDetailsActivity">
 
         <ImageView
-            android:id="@+id/activity_detalhes_produto_imagem"
+            android:id="@+id/product_details_activity_product_image"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:contentDescription="Imagem do produto"
@@ -23,7 +23,7 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/activity_detalhes_produto_nome"
+            android:id="@+id/product_details_activity_product_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -33,12 +33,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_detalhes_produto_valor"
+            app:layout_constraintTop_toBottomOf="@+id/product_details_activity_product_value"
             app:layout_constraintVertical_bias="0.0"
             tools:text="@tools:sample/lorem[10]" />
 
         <TextView
-            android:id="@+id/activity_detalhes_produto_descricao"
+            android:id="@+id/product_details_activity_product_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -48,11 +48,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_detalhes_produto_nome"
+            app:layout_constraintTop_toBottomOf="@id/product_details_activity_product_name"
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
-            android:id="@+id/activity_detalhes_produto_valor"
+            android:id="@+id/product_details_activity_product_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -65,11 +65,11 @@
             android:textColor="@android:color/holo_green_dark"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/activity_detalhes_produto_imagem"
+            app:layout_constraintBottom_toBottomOf="@+id/product_details_activity_product_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_detalhes_produto_imagem"
+            app:layout_constraintTop_toBottomOf="@+id/product_details_activity_product_image"
             tools:text="R$ 1299,99" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

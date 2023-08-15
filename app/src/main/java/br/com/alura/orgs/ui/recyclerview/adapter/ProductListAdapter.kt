@@ -33,11 +33,11 @@ class ProductListAdapter(
 
         fun bind(product: Product) {
             this.product = product
-            val name = binding.produtoItemNome
+            val name = binding.productItemName
             name.text = product.name
-            val description = binding.produtoItemDescricao
+            val description = binding.productItemDescription
             description.text = product.description
-            val value = binding.produtoItemValor
+            val value = binding.productItemValue
             val currencyValue: String = product.value
                 .formatForBrazilianCurrency()
             value.text = currencyValue
@@ -48,9 +48,9 @@ class ProductListAdapter(
                 View.GONE
             }
 
-            binding.imageView.visibility = visibility
+            binding.productItemImage.visibility = visibility
 
-            binding.imageView.tryToLoadImage(product.image)
+            binding.productItemImage.tryToLoadImage(product.image)
         }
 
     }

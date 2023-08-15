@@ -12,7 +12,7 @@
         tools:context=".ui.activity.ProductFormActivity">
 
         <ImageView
-            android:id="@+id/activity_formulario_produto_imagem"
+            android:id="@+id/product_form_activity_product_image"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -22,17 +22,17 @@
             app:srcCompat="@drawable/default_image" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/formulario_produto_textinputlayout_nome"
+            android:id="@+id/product_form_activity_input_layout_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_formulario_produto_imagem">
+            app:layout_constraintTop_toBottomOf="@id/product_form_activity_product_image">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_formulario_produto_nome"
+                android:id="@+id/product_form_activity_product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nome"
@@ -41,17 +41,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/formulario_produto_textinputlayout_descricao"
+            android:id="@+id/product_form_activity_input_layout_description"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/formulario_produto_textinputlayout_nome">
+            app:layout_constraintTop_toBottomOf="@id/product_form_activity_input_layout_name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_formulario_produto_descricao"
+                android:id="@+id/product_form_activity_product_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Descrição"
@@ -60,17 +60,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/formulario_produto_textinputlayout_valor"
+            android:id="@+id/product_form_activity_input_layout_value"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/formulario_produto_textinputlayout_descricao">
+            app:layout_constraintTop_toBottomOf="@id/product_form_activity_input_layout_description">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_formulario_produto_valor"
+                android:id="@+id/product_form_activity_product_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Valor"
@@ -79,7 +79,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/activity_formulario_produto_botao_salvar"
+            android:id="@+id/product_form_activity_button_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -87,7 +87,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/formulario_produto_textinputlayout_valor"
+            app:layout_constraintTop_toBottomOf="@+id/product_form_activity_input_layout_value"
             app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,11 +25,11 @@ class ProductFormActivity : AppCompatActivity() {
         setContentView(binding.root)
         title = "Cadastrar produto"
         setupSaveButton()
-        binding.activityFormularioProdutoImagem.setOnClickListener {
+        binding.productFormActivityProductImage.setOnClickListener {
             ImageFormDialog(this)
                 .show(url) { image ->
                     url = image
-                    binding.activityFormularioProdutoImagem.tryToLoadImage(url)
+                    binding.productFormActivityProductImage.tryToLoadImage(url)
                 }
         }
         productId = intent.getLongExtra(PRODUCT_ID_KEY, 0L)
@@ -47,15 +47,15 @@ class ProductFormActivity : AppCompatActivity() {
         url = product.image
         title = "Alterar Produto"
         binding.apply {
-            activityFormularioProdutoImagem.tryToLoadImage(product.image)
-            activityFormularioProdutoNome.setText(product.name)
-            activityFormularioProdutoDescricao.setText(product.description)
-            activityFormularioProdutoValor.setText(product.value.toPlainString())
+            productFormActivityProductImage.tryToLoadImage(product.image)
+            productFormActivityProductName.setText(product.name)
+            productFormActivityProductDescription.setText(product.description)
+            productFormActivityProductValue.setText(product.value.toPlainString())
         }
     }
 
     private fun setupSaveButton() {
-        val saveButton = binding.activityFormularioProdutoBotaoSalvar
+        val saveButton = binding.productFormActivityButtonSave
         saveButton.setOnClickListener {
             val newProduct = createProduct()
             productDao.save(newProduct)
@@ -64,11 +64,11 @@ class ProductFormActivity : AppCompatActivity() {
     }
 
     private fun createProduct(): Product {
-        val fieldName = binding.activityFormularioProdutoNome
+        val fieldName = binding.productFormActivityProductName
         val name = fieldName.text.toString()
-        val fieldDescription = binding.activityFormularioProdutoDescricao
+        val fieldDescription = binding.productFormActivityProductDescription
         val description = fieldDescription.text.toString()
-        val fieldValue = binding.activityFormularioProdutoValor
+        val fieldValue = binding.productFormActivityProductValue
         val textValue = fieldValue.text.toString()
         val value = if (textValue.isBlank()) {
             BigDecimal.ZERO

@@ -16,19 +16,19 @@ class ImageFormDialog(private val context: Context) {
             .inflate(LayoutInflater.from(context)).apply {
 
                 defaultUrl?.let {
-                    formularioImagemImageview.tryToLoadImage(it)
-                    formularioImagemUrl.setText(it)
+                    imageFormDialogProductImage.tryToLoadImage(it)
+                    imageFormDialogUrlImage.setText(it)
                 }
 
-                formularioImagemBotaoCarregar.setOnClickListener {
-                    val url = formularioImagemUrl.text.toString()
-                    formularioImagemImageview.tryToLoadImage(url)
+                imageFormDialogButtonLoad.setOnClickListener {
+                    val url = imageFormDialogUrlImage.text.toString()
+                    imageFormDialogProductImage.tryToLoadImage(url)
                 }
 
                 AlertDialog.Builder(context)
                     .setView(root)
                     .setPositiveButton("Confirmar") { _, _ ->
-                        val url = formularioImagemUrl.text.toString()
+                        val url = imageFormDialogUrlImage.text.toString()
                         imageLoad(url)
                     }
                     .setNegativeButton("Cancelar") { _, _ ->

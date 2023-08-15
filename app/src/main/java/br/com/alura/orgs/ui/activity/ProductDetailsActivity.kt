@@ -69,10 +69,10 @@ class ProductDetailsActivity : AppCompatActivity() {
 
     private fun fillInFields(loadedProduct: Product) {
         with(binding) {
-            activityDetalhesProdutoImagem.tryToLoadImage(loadedProduct.image)
-            activityDetalhesProdutoNome.text = loadedProduct.name
-            activityDetalhesProdutoDescricao.text = loadedProduct.description
-            activityDetalhesProdutoValor.text =
+            productDetailsActivityProductImage.tryToLoadImage(loadedProduct.image)
+            productDetailsActivityProductName.text = loadedProduct.name
+            productDetailsActivityProductDescription.text = loadedProduct.description
+            productDetailsActivityProductValue.text =
                 loadedProduct.value.formatForBrazilianCurrency()
         }
     }

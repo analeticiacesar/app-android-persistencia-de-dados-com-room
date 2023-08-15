@@ -11,7 +11,7 @@
 
 
         <ImageView
-            android:id="@+id/formulario_imagem_imageview"
+            android:id="@+id/image_form_dialog_product_image"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -21,18 +21,18 @@
             app:srcCompat="@drawable/default_image" />
 
         <Button
-            android:id="@+id/formulario_imagem_botao_carregar"
+            android:id="@+id/image_form_dialog_button_load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Carregar"
             app:icon="@drawable/ic_action_refresh"
-            app:layout_constraintBottom_toBottomOf="@id/formulario_imagem_imageview"
+            app:layout_constraintBottom_toBottomOf="@id/image_form_dialog_product_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/formulario_imagem_imageview" />
+            app:layout_constraintTop_toBottomOf="@id/image_form_dialog_product_image" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/formulario_imagem_textinputlayout_url"
+            android:id="@+id/image_form_dialog_input_layout_url"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,10 +40,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/formulario_imagem_botao_carregar">
+            app:layout_constraintTop_toBottomOf="@id/image_form_dialog_button_load">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/formulario_imagem_url"
+                android:id="@+id/image_form_dialog_url_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="URL da imagem"
