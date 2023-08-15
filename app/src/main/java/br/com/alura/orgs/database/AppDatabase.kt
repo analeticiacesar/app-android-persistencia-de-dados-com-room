@@ -15,7 +15,7 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun productDao(): ProductDao
 
     companion object {
-        fun databaseInstance(context: Context): AppDatabase {
+        fun getInstance(context: Context): AppDatabase {
             return Room.databaseBuilder(
                 context,
                 AppDatabase::class.java,

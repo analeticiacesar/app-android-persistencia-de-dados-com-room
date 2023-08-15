@@ -3,7 +3,6 @@ package br.com.alura.orgs.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import br.com.alura.orgs.database.AppDatabase
 import br.com.alura.orgs.databinding.ActivityProductListBinding
 import br.com.alura.orgs.ui.recyclerview.adapter.ProductListAdapter
@@ -24,7 +23,7 @@ class ProductListActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val db = AppDatabase.databaseInstance(this)
+        val db = AppDatabase.getInstance(this)
         val productDao = db.productDao()
         adapter.update(productDao.searchAll())
     }

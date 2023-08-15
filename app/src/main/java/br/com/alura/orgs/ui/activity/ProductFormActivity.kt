@@ -32,7 +32,7 @@ class ProductFormActivity : AppCompatActivity() {
 
     private fun setupSaveButton() {
         val saveButton = binding.activityFormularioProdutoBotaoSalvar
-        val db = AppDatabase.databaseInstance(this)
+        val db = AppDatabase.getInstance(this)
         val productDao = db.productDao()
         saveButton.setOnClickListener {
             val newProduct = createProduct()

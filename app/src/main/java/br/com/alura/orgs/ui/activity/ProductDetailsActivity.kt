@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import br.com.alura.orgs.R
+import br.com.alura.orgs.database.AppDatabase
 import br.com.alura.orgs.databinding.ActivityProductDetailsBinding
 import br.com.alura.orgs.extensions.formatForBrazilianCurrency
 import br.com.alura.orgs.extensions.tryToLoadImage
@@ -12,6 +13,7 @@ import br.com.alura.orgs.model.Product
 
 class ProductDetailsActivity : AppCompatActivity() {
 
+    private lateinit var product: Product
     private val binding by lazy {
         ActivityProductDetailsBinding.inflate(layoutInflater)
     }
@@ -28,29 +30,35 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.item_edit -> {
+        if(::product.isInitialized){
+            val db = AppDatabase.getInstance(this)
+            val productDao = db.productDao()
+            when(item.itemId) {
+                R.id.item_edit -> {
 
-            }
-            R.id.item_delete -> {
-                
+                }
+                R.id.item_delete -> {
+                    productDao.delete(product)
+                    finish()
+                }
             }
         }
         return super.onOptionsItemSelected(item)
     }
     private fun tryToLoadProduct() {
         intent.getParcelableExtra<Product>(PRODUCT_KEY)?.let { loadedProduct ->
+            product = loadedProduct
             fillInFields(loadedProduct)
         } ?: finish()
     }
 
-    private fun fillInFields(productCarregado: Product) {
+    private fun fillInFields(loadedProduct: Product) {
         with(binding) {
-            activityDetalhesProdutoImagem.tryToLoadImage(productCarregado.image)
-            activityDetalhesProdutoNome.text = productCarregado.name
-            activityDetalhesProdutoDescricao.text = productCarregado.description
+            activityDetalhesProdutoImagem.tryToLoadImage(loadedProduct.image)
+            activityDetalhesProdutoNome.text = loadedProduct.name
+            activityDetalhesProdutoDescricao.text = loadedProduct.description
             activityDetalhesProdutoValor.text =
-                productCarregado.value.formatForBrazilianCurrency()
+                loadedProduct.value.formatForBrazilianCurrency()
         }
     }
 
