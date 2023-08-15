@@ -32,19 +32,21 @@ class ProductListActivity : AppCompatActivity() {
         ).allowMainThreadQueries()
             .build()
         val productDao = db.productDao()
-        productDao.save(
-            Product(
-                name = "teste nome 1",
-                description = "teste desc 1",
-                value = BigDecimal("20.0")
-            )
-        )
+//        productDao.save(
+//            Product(
+//                name = "teste nome 1",
+//                description = "teste desc 1",
+//                value = BigDecimal("20.0")
+//            )
+//        )
         adapter.update(productDao.searchAll())
     }
 
     override fun onResume() {
         super.onResume()
-//        adapter.update(dao.searchAll())
+        val db = AppDatabase.databaseInstance(this)
+        val productDao = db.productDao()
+        adapter.update(productDao.searchAll())
     }
 
     private fun setupFab() {
