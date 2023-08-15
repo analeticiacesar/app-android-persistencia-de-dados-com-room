@@ -1,5 +1,6 @@
 package br.com.alura.orgs.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -13,9 +14,13 @@ import br.com.alura.orgs.model.Product
 
 class ProductDetailsActivity : AppCompatActivity() {
 
-    private lateinit var product: Product
+    private var productId: Long? = null
+    private var product: Product? = null
     private val binding by lazy {
         ActivityProductDetailsBinding.inflate(layoutInflater)
+    }
+    private val productDao by lazy {
+        AppDatabase.getInstance(this).productDao()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,31 +29,41 @@ class ProductDetailsActivity : AppCompatActivity() {
         tryToLoadProduct()
     }
 
+    override fun onResume() {
+        super.onResume()
+        productId?.let { id ->
+            product = productDao.searchById(id)
+        }
+        product?.let {
+            fillInFields(it)
+        } ?: finish()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_product_details, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(::product.isInitialized){
-            val db = AppDatabase.getInstance(this)
-            val productDao = db.productDao()
             when(item.itemId) {
                 R.id.item_edit -> {
-
+                    Intent(this, ProductFormActivity::class.java).apply {
+                        putExtra(PRODUCT_KEY, product)
+                        startActivity(this)
+                    }
                 }
                 R.id.item_delete -> {
-                    productDao.delete(product)
+                    product?.let {
+                        productDao.delete(it)
+                    }
                     finish()
                 }
             }
-        }
         return super.onOptionsItemSelected(item)
     }
     private fun tryToLoadProduct() {
         intent.getParcelableExtra<Product>(PRODUCT_KEY)?.let { loadedProduct ->
-            product = loadedProduct
-            fillInFields(loadedProduct)
+            productId = loadedProduct.id
         } ?: finish()
     }
 

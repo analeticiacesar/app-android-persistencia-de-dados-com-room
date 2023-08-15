@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import br.com.alura.orgs.model.Product
 
 @Dao
@@ -17,5 +18,11 @@ interface ProductDao {
 
     @Delete
     fun delete(product: Product)
+
+    @Update
+    fun update(product: Product)
+
+    @Query("SELECT * FROM Product WHERE id = :id")
+    fun searchById(id: Long) : Product?
 
 }

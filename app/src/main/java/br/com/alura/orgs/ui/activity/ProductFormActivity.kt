@@ -15,6 +15,7 @@ class ProductFormActivity : AppCompatActivity() {
         ActivityProductFormBinding.inflate(layoutInflater)
     }
     private var url: String? = null
+    private var productId = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,18 @@ class ProductFormActivity : AppCompatActivity() {
                     binding.activityFormularioProdutoImagem.tryToLoadImage(url)
                 }
         }
+        intent.getParcelableExtra<Product>(PRODUCT_KEY)?.let { loadedProduct ->
+            productId = loadedProduct.id
+            url = loadedProduct.image
+            title = "Alterar Produto"
+            binding.apply {
+                activityFormularioProdutoImagem.tryToLoadImage(loadedProduct.image)
+                activityFormularioProdutoNome.setText(loadedProduct.name)
+                activityFormularioProdutoDescricao.setText(loadedProduct.description)
+                activityFormularioProdutoValor.setText(loadedProduct.value.toPlainString())
+            }
+
+        }
     }
 
     private fun setupSaveButton() {
@@ -36,7 +49,12 @@ class ProductFormActivity : AppCompatActivity() {
         val productDao = db.productDao()
         saveButton.setOnClickListener {
             val newProduct = createProduct()
-            productDao.save(newProduct)
+            if(productId > 0) {
+                productDao.update(newProduct)
+            }
+            else {
+                productDao.save(newProduct)
+            }
             finish()
         }
     }
@@ -55,6 +73,7 @@ class ProductFormActivity : AppCompatActivity() {
         }
 
         return Product(
+            id = productId,
             name = name,
             description = description,
             value = value,
