@@ -7,6 +7,10 @@ import br.com.alura.orgs.databinding.ActivityProductFormBinding
 import br.com.alura.orgs.extensions.tryToLoadImage
 import br.com.alura.orgs.model.Product
 import br.com.alura.orgs.ui.dialog.ImageFormDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.math.BigDecimal
 
 class ProductFormActivity : AppCompatActivity() {
@@ -19,6 +23,7 @@ class ProductFormActivity : AppCompatActivity() {
     }
     private var url: String? = null
     private var productId = 0L
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +42,12 @@ class ProductFormActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        productDao.searchById(productId)?.let {
-            fillInFields(it)
+        scope.launch {
+            productDao.searchById(productId)?.let {
+                withContext(Dispatchers.Main) {
+                    fillInFields(it)
+                }
+            }
         }
     }
 
@@ -58,8 +67,10 @@ class ProductFormActivity : AppCompatActivity() {
         val saveButton = binding.productFormActivityButtonSave
         saveButton.setOnClickListener {
             val newProduct = createProduct()
-            productDao.save(newProduct)
-            finish()
+            scope.launch {
+                productDao.save(newProduct)
+                finish()
+            }
         }
     }
 

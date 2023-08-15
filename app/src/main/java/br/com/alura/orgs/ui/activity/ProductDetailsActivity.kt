@@ -11,6 +11,10 @@ import br.com.alura.orgs.databinding.ActivityProductDetailsBinding
 import br.com.alura.orgs.extensions.formatForBrazilianCurrency
 import br.com.alura.orgs.extensions.tryToLoadImage
 import br.com.alura.orgs.model.Product
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProductDetailsActivity : AppCompatActivity() {
 
@@ -22,6 +26,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     private val productDao by lazy {
         AppDatabase.getInstance(this).productDao()
     }
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +40,14 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     private fun searchProduct() {
-        product = productDao.searchById(productId)
-        product?.let {
-            fillInFields(it)
-        } ?: finish()
+        scope.launch {
+            product = productDao.searchById(productId)
+            withContext(Dispatchers.Main) {
+                product?.let {
+                    fillInFields(it)
+                } ?: finish()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -55,10 +64,12 @@ class ProductDetailsActivity : AppCompatActivity() {
                     }
                 }
                 R.id.item_delete -> {
-                    product?.let {
-                        productDao.delete(it)
+                    scope.launch {
+                        product?.let {
+                            productDao.delete(it)
+                        }
+                        finish()
                     }
-                    finish()
                 }
             }
         return super.onOptionsItemSelected(item)
